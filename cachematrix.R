@@ -1,13 +1,23 @@
-# Assignment instructions here:
-# https://class.coursera.org/rprog-013/human_grading/view/courses/973494/assessments/3/submissions
-
+#April 21, 2015 18:27 EDT
+#RHD
 
 ## makeCacheMatrix This function creates a special "matrix" object 
 ## that can cache its inverse:
 makeCacheMatrix <- function(x = matrix()) {
-
+      
+  ## olderMatrix: check for existence and create if needed    
+  if(!olderMatrix) {
+        ## No previous inversions may have happened
+        ## Create object to store previous matrix sent for inversion
+        olderMatrix <<- NULL  
+        ## once inverse is computed, olderMatrix will be assigned "x"
+        ## for future change checks 
+      } 
+  
+      ## Let's compute the inverse and return it
+      InverseMatrix <- cacheSolve(x, olderMatrix)
+      InverseMatrix
 }
-
 
 ## cacheSolve: This function computes the inverse of the special "matrix" 
 ## returned by makeCacheMatrix above. If the inverse has already been calculated 
@@ -15,6 +25,22 @@ makeCacheMatrix <- function(x = matrix()) {
 ## inverse from the cache.
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-        ## Function should probably check 
+        
+  
+        ## Check if a cache solution exists and matrix is unchanged 
+        ## and return a matrix that is the inverse of 'x'
+  
+        if ((x == olderMatrix)&(cachedInverse)){
+          ## Matrix is the same, and an inverse exisits
+          ## No need to compute a new inverse, return cachedInverse
+          cachedInverse
+          
+        } else if {
+          ## Either matrix has changed or a previous cache doesn't exist
+          ## Create the inverse and store it in cachedInverse 
+          cachedInverse <<- solve(x)
+          ## return cachedInverse object
+          cachedInverse
+        }
+  
 }
